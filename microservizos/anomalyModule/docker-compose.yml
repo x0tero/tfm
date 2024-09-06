@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  python-app:
+    image: python-anomaly:v1
+    restart: always
+    container_name: "satcomm-anomaly-app"
+    volumes:
+      - ./emitter.py:/home/anomalyDetection.py
+      - ./models:/home/models
+      - ./inputs:/home/inputs
+    stdin_open: true
+    tty: true
+    ports:
+      - "1883"
+    networks:
+      net:
+        ipv4_address: 172.18.0.176
+    command: /bin/sh -c 'python /home/anomalyDetection.py'
+networks:
+  net:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16

@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  python-platform-bd:
+    image: python-platform-db:v1
+    restart: always
+    container_name: "bd-mqtt-interface"
+    volumes:
+      - ./platform-bd.py:/home/platform-bd.py
+    stdin_open: true
+    tty: true
+    ports:
+      - "1883"
+    networks:
+      net:
+        ipv4_address: 172.18.0.140
+    command: /bin/sh -c 'python /home/platform-bd.py'
+networks:
+  net:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16

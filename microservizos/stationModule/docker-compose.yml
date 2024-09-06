@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  python-app:
+    image: station-module:v1
+    restart: on-failure
+    container_name: "station-module"
+    volumes:
+      - ./stationModule.py:/home/stationModule.py
+      - ./inputs:/home/inputs
+      - ./probaEmision.csv:/home/probaEmision.csv
+    stdin_open: true
+    tty: true
+    networks:
+      net:
+        ipv4_address: 172.18.0.189
+    command: /bin/sh -c 'python /home/stationModule.py'
+networks:
+  net:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
