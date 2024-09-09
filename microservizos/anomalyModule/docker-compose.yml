@@ -1,12 +1,12 @@
 version: '3.7'
 services:
   python-app:
-    image: python-anomaly:v1
+    image: anomalies-module:v1
     restart: always
-    container_name: "satcomm-anomaly-app"
+    container_name: "anomalyModule"
     volumes:
-      - ./emitter.py:/home/anomalyDetection.py
-      - ./models:/home/models
+      - ./anomalyDetection.py:/home/anomalyDetection.py
+      - ./model:/home/model
       - ./inputs:/home/inputs
     stdin_open: true
     tty: true
